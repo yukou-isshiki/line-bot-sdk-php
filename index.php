@@ -1,7 +1,7 @@
 <?php
 
 // Composerでインストールしたライブラリを一括読み込み
-rquire_once __DIR__ . '/vendor/autoload.php';
+require_once __DIR__ . '/vendor/autoload.php';
 
 // テーブル名を定義
 define('TABLE_NAME_CONVERSATIONS', 'conversations');
