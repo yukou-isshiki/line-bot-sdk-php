@@ -70,14 +70,14 @@ function setLastConversationData($userId, $lastConversationData) {
   $conversationId = $lastConversationData['conversation_id'];
   $dialogNode = $lastConversationData['dialog_node'];
 
-  if(getLastConversationData($userId, $lastConversationData) {
+  if(getLastConversationData($userId) === PDO::PARAM_NULL) {
     $dbh = dbConnection::getConnection();
     $sql = 'insert into ' . TABLE_NAME_CONVERSATIONS . ' (conversation_id, dialog_node, userId) values (?, ?, pgp_sym_encrypt(?, \'' . getenv('DB_ENCRYPT_PASS') . '\'))';
     $sth = $dbh->prepare($sql);
     $sth->execute(array($conversationId, $dialogNode, $userId));
   } else {
     $dbh = dbConnection::getConnection();
-    $sql = 'update ' . TABLE_CONVERSATIONS . ' set conversation_id =　?, dialog_node = ? where ? = pgp_sym_decrypt(userid, \'' . getenv('DB_ENCRYPT_PASS') . '\')';
+    $sql = 'update ' . TABLE_NAME_CONVERSATIONS . ' set conversation_id =　?, dialog_node = ? where ? = pgp_sym_decrypt(userid, \'' . getenv('DB_ENCRYPT_PASS') . '\')';
     $sth = $dbh->prepare($sql);
     $sth->execute(array($conversationId, $dialogNode, $userId));
   }
@@ -129,7 +129,7 @@ class dbConnection {
   }
 }
 
-
+/*
 // アクセストークンを使いCurlHTTPClientをインスタンス化
 $httpClient = new ¥src¥LINEBot¥HTTPClient¥CurlHTTPClient(getenv('CHANNEL_ACCESS_TOKEN'));
 
@@ -165,5 +165,5 @@ foreach ($events as $events) {
     continue;
   }
 }
-
+*/
 ?>
