@@ -129,7 +129,7 @@ class dbConnection {
   }
 }
 
-/*
+
 // アクセストークンを使いCurlHTTPClientをインスタンス化
 $httpClient = new ¥src¥LINEBot¥HTTPClient¥CurlHTTPClient(getenv('CHANNEL_ACCESS_TOKEN'));
 
@@ -165,5 +165,5 @@ foreach ($events as $events) {
     continue;
   }
 }
-*/
+
 ?>
