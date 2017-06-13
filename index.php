@@ -24,6 +24,7 @@ define('TABLE_NAME_CONVERSATIONS', 'conversations');
   // 新規セッションを初期化
   $curl = curl_init($url);
 
+/*
   // オプション
   $options = array(
     // コンテンツタイプ
@@ -33,15 +34,14 @@ define('TABLE_NAME_CONVERSATIONS', 'conversations');
     // 認証用
     CURLOPT_USERPWD => getenv('WATSON_USERNAME') . ':' . getenv('WATSON_PASSWORD'),
 
-/*
     // POST
     CURLOPT_POST => true,
     // 内容
     CURLOPT_POSTFIELDS => json_encode($data),
     // curl_exec時にbooleanでなく取得結果を返す
     CURLOPT_RETURNTRANSFER => true,
-    */
   );
+ */
 
 /*
   // オプションを適用
