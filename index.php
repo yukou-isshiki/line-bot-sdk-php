@@ -59,8 +59,10 @@ define('TABLE_NAME_CONVERSATIONS', 'conversations');
   // Conversationからの返答を取得
   $outputText =$json['output']['text'][count($json['output']['text']) - 1];
 
+/*
   // ユーザーに返信
   replyTextMessage($bot, $event->getReplyToken(), $outputText);
+  */
 }
 
 
