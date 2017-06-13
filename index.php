@@ -41,8 +41,10 @@ define('TABLE_NAME_CONVERSATIONS', 'conversations');
     CURLOPT_RETURNTRANSFER => true,
   );
 
+/*
   // オプションを適用
   curl_setopt_array($curl, $options);
+  */
   /*
   // セッションを実行し結果を取得
   $jsonString = curl_exec($curl);
