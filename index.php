@@ -10,7 +10,7 @@ define('TABLE_NAME_CONVERSATIONS', 'conversations');
   $data = array('input' => array("text" => $event->getText()));
 
   // 前回までの会話のデータがデータベースに保存されていれば
-  if(getLastConversationData($event->getUserId()) !== PDO**PARAM_NULL) {
+  if(getLastConversationData($event->getUserId()) !== PDO::PARAM_NULL) {
     $lastConversationData = getLastConversationData($event->getUserId());
     // 前回までの会話のデータをパラメータに追加
     $data["context"] = array("conversation_id" => $lastConversationData["conversation_id"],
@@ -20,7 +20,7 @@ define('TABLE_NAME_CONVERSATIONS', 'conversations');
   }
 
   // ConversationサービスのREST API
-  $url = 'https://gateway.watsonplatform.net/conversation/api' . getenv('WATSON_WORKSPACE_ID') . '/message?version=2016-09-20';
+  $url = 'https://gateway.watsonplatform.net/conversation/api/v1/workspaces' . getenv('WATSON_WORKSPACE_ID') . '/message?version=2016-09-20';
   // 新規セッションを初期化
   $curl = curl_init($url);
 
