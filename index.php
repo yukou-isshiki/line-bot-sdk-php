@@ -52,9 +52,11 @@ define('TABLE_NAME_CONVERSATIONS', 'conversations');
   $conversationId = $json["context"]["conversation_id"];
   $dialogNode = $json["context"]["system"]["dialog_stack"][0]["dialog_node"]
 
+/*
   // データベースに保存
   $conversationData = array('conversation_id' => $conversationId, 'dialog_node' => $dialogNode);
   setLastConversationData($event->getUserId(), $conversationData);
+  */
 
 /*
   // Conversationからの返答を取得
