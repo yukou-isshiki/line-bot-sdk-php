@@ -48,9 +48,11 @@ define('TABLE_NAME_CONVERSATIONS', 'conversations');
   // 文字列を連想配列に変換
   $json = json_decode($jsonString, true);
 
+/*
   // 会話データを取得
   $conversationId = $json["context"]["conversation_id"];
   $dialogNode = $json["context"]["system"]["dialog_stack"][0]["dialog_node"]
+  */
 
 /*
   // データベースに保存
