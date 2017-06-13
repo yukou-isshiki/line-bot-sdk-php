@@ -83,6 +83,7 @@ function setLastConversationData($userId, $lastConversationData) {
   }
 }
 
+/*
 // データベースから会話データを取得
 function getLastConversationData($userId) {
   $dbh = dbConnection::getConnection();
@@ -95,6 +96,7 @@ function getLastConversationData($userId) {
     return array('conversation_id' => $row['conversation_id'], 'dialog_node' => $row['dialog_node']);
   }
 }
+*/
 
 
 /*
