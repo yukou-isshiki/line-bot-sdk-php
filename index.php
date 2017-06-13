@@ -43,8 +43,10 @@ define('TABLE_NAME_CONVERSATIONS', 'conversations');
 
   // オプションを適用
   curl_setopt_array($curl, $options);
+  /*
   // セッションを実行し結果を取得
   $jsonString = curl_exec($curl);
+  */
   /*
   // 文字列を連想配列に変換
   $json = json_decode($jsonString, true);
@@ -71,7 +73,7 @@ define('TABLE_NAME_CONVERSATIONS', 'conversations');
   // ユーザーに返信
   replyTextMessage($bot, $event->getReplyToken(), $outputText);
   */
-}
+
 
 
 /*
