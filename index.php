@@ -6,9 +6,10 @@ require_once __DIR__ . '/vendor/autoload.php';
 // テーブル名を定義
 define('TABLE_NAME_CONVERSATIONS', 'conversations');
 
+/*
   // パラメータ
   $data = array('input' => array("text" => $event->getText()));
-
+*/
 /*
   // 前回までの会話のデータがデータベースに保存されていれば
   if(getLastConversationData($event->getUserId()) !== PDO::PARAM_NULL) {
