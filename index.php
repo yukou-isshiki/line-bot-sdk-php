@@ -10,7 +10,7 @@ define('TABLE_NAME_CONVERSATIONS', 'conversations');
   // パラメータ
   $data = array('input' => array("text" => $event->getText()));
 */
-/*
+
   // 前回までの会話のデータがデータベースに保存されていれば
   if(getLastConversationData($event->getUserId()) !== PDO::PARAM_NULL) {
     $lastConversationData = getLastConversationData($event->getUserId());
@@ -20,7 +20,7 @@ define('TABLE_NAME_CONVERSATIONS', 'conversations');
       "dialog_turn_counter" => 1,
       "dialog_request_counter" => 1));
   }
-  */
+  
 
 /*
   // ConversationサービスのREST API
