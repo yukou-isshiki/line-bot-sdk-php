@@ -104,7 +104,7 @@ class dbConnection {
   protected static $db;
   // コンストラクタ
   private function __construct() {
-
+/*
     try {
       // 環境変数からデータベースへの接続情報を取得し
       $url = parse_url(getenv('DATABASE_URL'));
@@ -120,7 +120,6 @@ class dbConnection {
     }
   }
 
-/*
   // シングルトン。存在しない場合のみインスタンス化
   public static function getConnection() {
     if (!self::$db) {
