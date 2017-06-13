@@ -56,8 +56,10 @@ define('TABLE_NAME_CONVERSATIONS', 'conversations');
   $conversationData = array('conversation_id' => $conversationId, 'dialog_node' => $dialogNode);
   setLastConversationData($event->getUserId(), $conversationData);
 
+/*
   // Conversationからの返答を取得
   $outputText =$json['output']['text'][count($json['output']['text']) - 1];
+  */
 
 /*
   // ユーザーに返信
