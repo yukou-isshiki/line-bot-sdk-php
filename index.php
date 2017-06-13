@@ -72,12 +72,12 @@ function setLastConversationData($userId, $lastConversationData) {
 
   if(getLastConversationData($userId, $lastConversationData) {
     $dbh = dbConnection::getConnection();
-    $sql = 'insert into ' . TABLE_NAME_CONVERSATIONS . ' (conversation_id, dialog_node, userId) values (?, ?, pgp_sym_encrypt(?, ¥'' . getenv('DB_ENCRYPT_PASS') . '¥'))';
+    $sql = 'insert into ' . TABLE_NAME_CONVERSATIONS . ' (conversation_id, dialog_node, userId) values (?, ?, pgp_sym_encrypt(?, \'' . getenv('DB_ENCRYPT_PASS') . '\'))';
     $sth = $dbh->prepare($sql);
     $sth->execute(array($conversationId, $dialogNode, $userId));
   } else {
     $dbh = dbConnection::getConnection();
-    $sql = 'update ' . TABLE_CONVERSATIONS . ' set conversation_id =　?, dialog_node = ? where ? = pgp_sym_decrypt(userid, ¥'' . getenv('DB_ENCRYPT_PASS') . '¥')';
+    $sql = 'update ' . TABLE_CONVERSATIONS . ' set conversation_id =　?, dialog_node = ? where ? = pgp_sym_decrypt(userid, \'' . getenv('DB_ENCRYPT_PASS') . '\')';
     $sth = $dbh->prepare($sql);
     $sth->execute(array($conversationId, $dialogNode, $userId));
   }
@@ -86,7 +86,7 @@ function setLastConversationData($userId, $lastConversationData) {
 // データベースから会話データを取得
 function getLastConversationData($userId) {
   $dbh = dbConnection::getConnection();
-  $sql = 'select conversation_id, dialog_node from ' . TABLE_NAME_CONVERSATIONS . ' where ? = pgp_sym_decrypt(userid, ¥'' . getenv('DB_ENCRYPT_PASS') . '¥')';
+  $sql = 'select conversation_id, dialog_node from ' . TABLE_NAME_CONVERSATIONS . ' where ? = pgp_sym_decrypt(userid, \'' . getenv('DB_ENCRYPT_PASS') . '\')';
   $sth = $dbh->prepare($sql);
   $sth->execute(array($userId));
   if (!($row = $sth->fetch())) {
