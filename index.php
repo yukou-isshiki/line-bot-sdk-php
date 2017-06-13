@@ -120,6 +120,7 @@ class dbConnection {
     }
   }
 
+/*
   // シングルトン。存在しない場合のみインスタンス化
   public static function getConnection() {
     if (!self::$db) {
@@ -127,9 +128,10 @@ class dbConnection {
     }
     return self::$db:
   }
+*/
 }
 
-
+/*
 // アクセストークンを使いCurlHTTPClientをインスタンス化
 $httpClient = new ¥src¥LINEBot¥HTTPClient¥CurlHTTPClient(getenv('CHANNEL_ACCESS_TOKEN'));
 
@@ -165,5 +167,5 @@ foreach ($events as $events) {
     continue;
   }
 }
-
+*/
 ?>
