@@ -97,14 +97,13 @@ function getLastConversationData($userId) {
 }
 
 
-
+/*
 // データベースへの接続を管理するクラス
 class dbConnection {
   // インスタンス
   protected static $db;
   // コンストラクタ
   private function __construct() {
-/*
     try {
       // 環境変数からデータベースへの接続情報を取得し
       $url = parse_url(getenv('DATABASE_URL'));
@@ -127,8 +126,8 @@ class dbConnection {
     }
     return self::$db:
   }
-*/
 }
+*/
 
 /*
 // アクセストークンを使いCurlHTTPClientをインスタンス化
