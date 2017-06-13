@@ -64,7 +64,7 @@ define('TABLE_NAME_CONVERSATIONS', 'conversations');
 }
 
 
-
+/*
 // 会話データをデータベースに保存
 function setLastConversationData($userId, $lastConversationData) {
   $conversationId = $lastConversationData['conversation_id'];
@@ -82,6 +82,7 @@ function setLastConversationData($userId, $lastConversationData) {
     $sth->execute(array($conversationId, $dialogNode, $userId));
   }
 }
+*/
 
 /*
 // データベースから会話データを取得
