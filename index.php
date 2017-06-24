@@ -6,11 +6,11 @@ require_once __DIR__ . '/vendor/autoload.php';
 // テーブル名を定義
 define('TABLE_NAME_CONVERSATIONS', 'conversations');
 
-/*
+
   // パラメータ
   $data = array('input' => array("text" => $event->getText()));
-*/
-/*
+
+
   // 前回までの会話のデータがデータベースに保存されていれば
   if(getLastConversationData($event->getUserId()) !== PDO::PARAM_NULL) {
     $lastConversationData = getLastConversationData($event->getUserId());
@@ -20,7 +20,7 @@ define('TABLE_NAME_CONVERSATIONS', 'conversations');
       "dialog_turn_counter" => 1,
       "dialog_request_counter" => 1));
   }
-  */
+  
 
 
   // ConversationサービスのREST API
@@ -29,7 +29,7 @@ define('TABLE_NAME_CONVERSATIONS', 'conversations');
   $curl = curl_init($url);
 
 
-/*
+
   // オプション
   $options = array(
     // コンテンツタイプ
@@ -46,46 +46,46 @@ define('TABLE_NAME_CONVERSATIONS', 'conversations');
     // curl_exec時にbooleanでなく取得結果を返す
     CURLOPT_RETURNTRANSFER => true,
   );
- */
 
-/*
+
+
   // オプションを適用
   curl_setopt_array($curl, $options);
-  */
-  /*
+  
+  
   // セッションを実行し結果を取得
   $jsonString = curl_exec($curl);
-  */
-  /*
+  
+  
   // 文字列を連想配列に変換
   $json = json_decode($jsonString, true);
-  */
+  
 
-/*
+
   // 会話データを取得
   $conversationId = $json["context"]["conversation_id"];
   $dialogNode = $json["context"]["system"]["dialog_stack"][0]["dialog_node"]
-  */
+  
 
-/*
+
   // データベースに保存
   $conversationData = array('conversation_id' => $conversationId, 'dialog_node' => $dialogNode);
   setLastConversationData($event->getUserId(), $conversationData);
-  */
+  
 
-/*
+
   // Conversationからの返答を取得
   $outputText =$json['output']['text'][count($json['output']['text']) - 1];
-  */
+  
 
-/*
+
   // ユーザーに返信
   replyTextMessage($bot, $event->getReplyToken(), $outputText);
-  */
+  
 
 
 
-/*
+
 // 会話データをデータベースに保存
 function setLastConversationData($userId, $lastConversationData) {
   $conversationId = $lastConversationData['conversation_id'];
@@ -103,9 +103,9 @@ function setLastConversationData($userId, $lastConversationData) {
     $sth->execute(array($conversationId, $dialogNode, $userId));
   }
 }
-*/
 
-/*
+
+
 // データベースから会話データを取得
 function getLastConversationData($userId) {
   $dbh = dbConnection::getConnection();
@@ -118,10 +118,10 @@ function getLastConversationData($userId) {
     return array('conversation_id' => $row['conversation_id'], 'dialog_node' => $row['dialog_node']);
   }
 }
-*/
 
 
-/*
+
+
 // データベースへの接続を管理するクラス
 class dbConnection {
   // インスタンス
@@ -151,9 +151,9 @@ class dbConnection {
     return self::$db:
   }
 }
-*/
 
-/*
+
+
 // アクセストークンを使いCurlHTTPClientをインスタンス化
 $httpClient = new ¥src¥LINEBot¥HTTPClient¥CurlHTTPClient(getenv('CHANNEL_ACCESS_TOKEN'));
 
@@ -189,5 +189,5 @@ foreach ($events as $events) {
     continue;
   }
 }
-*/
+
 ?>
