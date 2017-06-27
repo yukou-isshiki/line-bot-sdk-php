@@ -3,6 +3,9 @@
 // Composerでインストールしたライブラリを一括読み込み
 require_once __DIR__ . '/vendor/autoload.php';
 
+//sato debug.
+ini_set('display_errors', 1);
+
 // テーブル名を定義
 define('TABLE_NAME_CONVERSATIONS', 'conversations');
 
