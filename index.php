@@ -148,7 +148,7 @@ class dbConnection {
     if (!self::$db) {
       new dbConnection();
     }
-    return self::$db:
+    return self::$db;
   }
 }
 
