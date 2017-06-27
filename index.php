@@ -64,7 +64,7 @@ define('TABLE_NAME_CONVERSATIONS', 'conversations');
 
   // 会話データを取得
   $conversationId = $json["context"]["conversation_id"];
-  $dialogNode = $json["context"]["system"]["dialog_stack"][0]["dialog_node"]
+  $dialogNode = $json["context"]["system"]["dialog_stack"][0]["dialog_node"];
   
 
 
