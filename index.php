@@ -43,11 +43,8 @@ foreach ($events as $events) {
     error_log('Non text message has come');
     continue;
   }
-}
-
   // パラメータ
   $data = array('input' => array("text" => $event->getText()));
-
 
   // 前回までの会話のデータがデータベースに保存されていれば
   if(getLastConversationData($event->getUserId()) !== PDO::PARAM_NULL) {
@@ -60,13 +57,10 @@ foreach ($events as $events) {
   }
   
 
-
   // ConversationサービスのREST API
   $url = 'https://gateway.watsonplatform.net/conversation/api/v1/workspaces' . getenv('WATSON_WORKSPACE_ID') . '/message?version=2016-09-20';
   // 新規セッションを初期化
   $curl = curl_init($url);
-
-
 
   // オプション
   $options = array(
@@ -85,41 +79,27 @@ foreach ($events as $events) {
     CURLOPT_RETURNTRANSFER => true,
   );
 
-
-
   // オプションを適用
   curl_setopt_array($curl, $options);
-  
-  
   // セッションを実行し結果を取得
   $jsonString = curl_exec($curl);
-  
-  
   // 文字列を連想配列に変換
   $json = json_decode($jsonString, true);
-  
-
 
   // 会話データを取得
   $conversationId = $json["context"]["conversation_id"];
   $dialogNode = $json["context"]["system"]["dialog_stack"][0]["dialog_node"];
-  
-
 
   // データベースに保存
   $conversationData = array('conversation_id' => $conversationId, 'dialog_node' => $dialogNode);
   setLastConversationData($event->getUserId(), $conversationData);
   
-
-
   // Conversationからの返答を取得
   $outputText =$json['output']['text'][count($json['output']['text']) - 1];
   
-
-
   // ユーザーに返信
   replyTextMessage($bot, $event->getReplyToken(), $outputText);
-  
+}
 
 
 
@@ -142,8 +122,6 @@ function setLastConversationData($userId, $lastConversationData) {
   }
 }
 
-
-
 // データベースから会話データを取得
 function getLastConversationData($userId) {
   $dbh = dbConnection::getConnection();
@@ -156,9 +134,6 @@ function getLastConversationData($userId) {
     return array('conversation_id' => $row['conversation_id'], 'dialog_node' => $row['dialog_node']);
   }
 }
-
-
-
 
 // データベースへの接続を管理するクラス
 class dbConnection {
@@ -187,44 +162,6 @@ class dbConnection {
       new dbConnection();
     }
     return self::$db;
-  }
-}
-
-
-
-// アクセストークンを使いCurlHTTPClientをインスタンス化
-$httpClient = new \LINE\LINEBot\HTTPClient\CurlHTTPClient(getenv('CHANNEL_ACCESS_TOKEN'));
-
-// CurlHTTPClientとシークレットを使いLINEBotをインスタンス化
-$bot = new \LINE\LINEBot($httpClient, ['channelSecret' => getenv('CHANNEL_SECRET')]);
-
-// LINE Messaging APIがリクエストに付与した署名を取得
-$signature = $_SERVER['HTTP_' . \LINE\LINEBot\Constant\HTTPHeader::LINE_SIGNATURE];
-
-// 署名が正当かチェック。正当であればリクエストをパースし配列へ
-// 不正であれば例外の内容を出力
-try {
-  $events = $bot->parseEventRequest(file_get_contents('php://input'), $signature);
-} catch(\LINE\LINEBot\Exception\InvalidSignatureException $e) {
-  error_log('parseEventRequest failed. InvalidSignatureException => '.var_export($e, true));
-} catch(\LINE\LINEBot\Exception\UnknownEventTypeException $e) {
-  error_log('parseEventRequest failed. UnknownEventTypeException => '.var_export($e, true));
-} catch(\LINE\LINEBot\Exception\UnknownMessageTypeException $e) {
-  error_log('parseEventRequest failed. UnknownMessageTypeException => '.var_export($e, true));
-} catch(\LINE\LINEBot\Exception\InvalidEventRequestException $e) {
-  error_log('parseEventRequest failed. InvalidEventRequestException => '.var_export($e, true));
-}
-// 配列に格納された各イベントをループで処理
-foreach ($events as $events) {
-  // MessageEventクラスのインスタンスでなければ処理をスキップ
-  if (!($event instanceof \LINE\LINEBot\Event\MessageEvent)) {
-    error_log('Non message event has come');
-    continue;
-  }
-  // TextMessageクラスのインスタンスでなければ処理をスキップ
-  if (!($event instanceof \LINE\LINEBot\Event\MessageEvent\TextMessage)) {
-    error_log('Non text message has come');
-    continue;
   }
 }
 
