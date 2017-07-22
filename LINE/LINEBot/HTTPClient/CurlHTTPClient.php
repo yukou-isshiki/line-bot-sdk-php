@@ -16,19 +16,19 @@
  * under the License.
  */
 
-namespace src\LINEBot\HTTPClient;
+namespace LINE\LINEBot\HTTPClient;
 
-use src\LINEBot\Constant\Meta;
-use src\LINEBot\Exception\CurlExecutionException;
-use src\LINEBot\HTTPClient;
-use src\LINEBot\Response;
+use LINE\LINEBot\Constant\Meta;
+use LINE\LINEBot\Exception\CurlExecutionException;
+use LINE\LINEBot\HTTPClient;
+use LINE\LINEBot\Response;
 
 /**
  * Class CurlHTTPClient.
  *
  * A HTTPClient that uses cURL.
  *
- * @package src\LINEBot\HTTPClient
+ * @package LINE\LINEBot\HTTPClient
  */
 class CurlHTTPClient implements HTTPClient
 {
