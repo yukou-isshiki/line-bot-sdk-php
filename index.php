@@ -165,4 +165,7 @@ class dbConnection {
   }
 }
 
+// 環境変数の中身判定
+var_dump('CHANNEL_ACCESS_TOKEN', 'CHANNEL_SECRET', 'WATSON_WORKSPACE_ID', 'WATSON_USERNAME', 'WATSON_PASSWORD', 'DB_ENCRYPT_PASS', 'DATABASE_URL')
+
 ?>
