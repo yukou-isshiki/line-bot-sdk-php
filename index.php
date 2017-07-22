@@ -32,7 +32,7 @@ try {
   error_log('parseEventRequest failed. InvalidEventRequestException => '.var_export($e, true));
 }
 // 配列に格納された各イベントをループで処理
-foreach ($events as $events) {
+foreach ((array)$events as $events) {
   // MessageEventクラスのインスタンスでなければ処理をスキップ
   if(!($event instanceof \LINE\LINEBot\Event\MessageEvent)) {
     error_log('Non message event has come');
