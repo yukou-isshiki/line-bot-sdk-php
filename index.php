@@ -58,7 +58,7 @@ foreach ((array)$events as $events) {
   
 
   // ConversationサービスのREST API
-  $url = 'https://gateway.watsonplatform.net/conversation/api/v1/workspaces' . getenv('WATSON_WORKSPACE_ID') . '/message?version=2016-09-20';
+  $url = 'https://gateway.watsonplatform.net/conversation/api/v1/workspaces' . getenv('WATSON_WORKSPACE_ID') . '/message/';
   // 新規セッションを初期化
   $curl = curl_init($url);
 
