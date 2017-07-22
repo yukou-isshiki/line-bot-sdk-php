@@ -9,6 +9,41 @@ ini_set('display_errors', 1);
 // テーブル名を定義
 define('TABLE_NAME_CONVERSATIONS', 'conversations');
 
+// アクセストークンを使いCurlHTTPClientをインスタンス化
+$httpClient = new \LINE\LINEBot\HTTPClient\CurlHTTPClient(getenv('CHANNEL_ACCESS_TOKEN'));
+
+// CurlHTTPClientとシークレットを使いLINEBotをインスタンス化
+$bot = new \LINE\LINEBot($httpClient, ['channelSecret' => getenv('CHANNEL_SECRET')]);
+
+// LINE Messaging APIがリクエストに付与した署名を取得
+$signature = $_SERVER['HTTP_' . \LINE\LINEBot\Constant\HTTPHeader::LINE_SIGNATURE];
+
+// 署名が正当かチェック。正当であればリクエストをパースし配列へ
+// 不正であれば例外の内容を出力
+try {
+  $events = $bot->parseEventRequest(file_get_contents('php://input'), $signature);
+} catch(\LINE\LINEBot\Exception\InvalidSignatureException $e) {
+  error_log('parseEventRequest failed. InvalidSignatureException => '.var_export($e, true));
+} catch(\LINE\LINEBot\Exception\UnknownEventTypeException $e) {
+  error_log('parseEventRequest failed. UnknownEventTypeException => '.var_export($e, true));
+} catch(\LINE\LINEBot\Exception\UnknownMessageTypeException $e) {
+  error_log('parseEventRequest failed. UnknownMessageTypeException => '.var_export($e, true));
+} catch(\LINE\LINEBot\Exception\InvalidEventRequestException $e) {
+  error_log('parseEventRequest failed. InvalidEventRequestException => '.var_export($e, true));
+}
+// 配列に格納された各イベントをループで処理
+foreach ($events as $events) {
+  // MessageEventクラスのインスタンスでなければ処理をスキップ
+  if(!($event instanceof \LINE\LINEBot\Event\MessageEvent)) {
+    error_log('Non message event has come');
+    continue;
+  }
+  // TextMessageクラスのインスタンスでなければ処理をスキップ
+  if(!($event instanceof \LINE\LINEBot\Event\MessageEvent\TextMessage)) {
+    error_log('Non text message has come');
+    continue;
+  }
+}
 
   // パラメータ
   $data = array('input' => array("text" => $event->getText()));
@@ -158,36 +193,36 @@ class dbConnection {
 
 
 // アクセストークンを使いCurlHTTPClientをインスタンス化
-$httpClient = new ¥src¥LINEBot¥HTTPClient¥CurlHTTPClient(getenv('CHANNEL_ACCESS_TOKEN'));
+$httpClient = new \LINE\LINEBot\HTTPClient\CurlHTTPClient(getenv('CHANNEL_ACCESS_TOKEN'));
 
 // CurlHTTPClientとシークレットを使いLINEBotをインスタンス化
-$bot = new ¥src¥LINEBot($httpClient, ['channelSecret' => getenv('CHANNEL_SECRET')]);
+$bot = new \LINE\LINEBot($httpClient, ['channelSecret' => getenv('CHANNEL_SECRET')]);
 
 // LINE Messaging APIがリクエストに付与した署名を取得
-$signature = $_SERVER['HTTP_' . ¥src¥LINEBot¥Constant¥HTTPHeader::LINE_SIGNATURE];
+$signature = $_SERVER['HTTP_' . \LINE\LINEBot\Constant\HTTPHeader::LINE_SIGNATURE];
 
 // 署名が正当かチェック。正当であればリクエストをパースし配列へ
 // 不正であれば例外の内容を出力
 try {
   $events = $bot->parseEventRequest(file_get_contents('php://input'), $signature);
-} catch(¥src¥LINEBot¥Exception¥InvalidSignatureException $e) {
+} catch(\LINE\LINEBot\Exception\InvalidSignatureException $e) {
   error_log('parseEventRequest failed. InvalidSignatureException => '.var_export($e, true));
-} catch(¥src¥LINEBot¥Exception¥UnknownEventTypeException $e) {
+} catch(\LINE\LINEBot\Exception\UnknownEventTypeException $e) {
   error_log('parseEventRequest failed. UnknownEventTypeException => '.var_export($e, true));
-} catch(¥src¥LINEBot¥Exception¥UnknownMessageTypeException $e) {
+} catch(\LINE\LINEBot\Exception\UnknownMessageTypeException $e) {
   error_log('parseEventRequest failed. UnknownMessageTypeException => '.var_export($e, true));
-} catch(¥src¥LINEBot¥Exception¥InvalidEventRequestException $e) {
+} catch(\LINE\LINEBot\Exception\InvalidEventRequestException $e) {
   error_log('parseEventRequest failed. InvalidEventRequestException => '.var_export($e, true));
 }
 // 配列に格納された各イベントをループで処理
 foreach ($events as $events) {
   // MessageEventクラスのインスタンスでなければ処理をスキップ
-  if (!($event instanceof ¥src¥LINEBot¥Event¥MessageEvent)) {
+  if (!($event instanceof \LINE\LINEBot\Event\MessageEvent)) {
     error_log('Non message event has come');
     continue;
   }
   // TextMessageクラスのインスタンスでなければ処理をスキップ
-  if (!($event instanceof ¥src¥LINEBot¥Event¥MessageEvent¥TextMessage)) {
+  if (!($event instanceof \LINE\LINEBot\Event\MessageEvent\TextMessage)) {
     error_log('Non text message has come');
     continue;
   }
