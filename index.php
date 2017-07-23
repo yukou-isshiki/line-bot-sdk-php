@@ -166,6 +166,6 @@ class dbConnection {
 }
 
 // 環境変数の中身判定
-var_dump($httpClient, $bot)
+var_dump($httpClient, $bot, $signature)
 
 ?>
